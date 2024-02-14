@@ -10,6 +10,7 @@ from pymoo.optimize import minimize
 import matplotlib.pyplot as plt
 
 lookup = create_data_lookup("./dataset/input_vrp.csv")
+#lookup = create_data_lookup("./dataset/sample_csv_input.csv")
 print(lookup['DM'].shape)
 print(lookup['DM'])
 
@@ -17,7 +18,7 @@ n_customers = len(lookup['DM']) - 1
 demands = lookup['DEMAND']
 visit_times = lookup['VISITED TIME']
 vehicle_capacity = 100
-max_travel_time = 10*60
+max_travel_time = 8*60
 distance_matrix = lookup['DM']
 problem = VRPProblem(n_customers, demands, visit_times, vehicle_capacity, 
                  max_travel_time, distance_matrix)
@@ -30,7 +31,7 @@ algorithm = factory.get_algorithm(name = "DE")
 print(algorithm)
 res = minimize(problem,
                algorithm,
-               ("n_gen", 10),
+               ("n_gen", 100),
                seed=1,
                verbose=1)
 
